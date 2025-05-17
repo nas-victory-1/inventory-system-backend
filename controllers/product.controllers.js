@@ -5,14 +5,14 @@ export const addProduct = async(req, res) =>{
     
     try {
         // if(!name | !category | !price | !stock){
-        //     res.status(400).json({
+        //     return res.status(400).json({
         //         success: false,
         //         message: "Please provide all fields"
         //     })
         // }
         const existingProduct = await Product.findOne({name})//Why are we destructuring here?
         if(existingProduct){
-            res.status(401).json({
+            return res.status(401).json({
                 success: false,
                 message: "Product already exists"
             })
@@ -34,7 +34,7 @@ export const addProduct = async(req, res) =>{
         })
         
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Internal Server error in adding product"
         })
